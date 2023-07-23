@@ -2,7 +2,7 @@ name: VyOS v1.4 Rolling Release
 
 on:
   schedule:
-    - cron: 0 3 * * *
+    - cron: 0 0 * * 1
 
 env:
   GIT_CLONE_URL: https://github.com/vyos/vyos-build
@@ -52,7 +52,7 @@ jobs:
 
       - name: Upload release asset
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           asset=$(find ./vyos-${{ env.VERSION }}-${{ env.ARCHITECTURE }}-iso/ -name "vyos-${{ env.VERSION }}-*.iso" | xargs)
           tag_name="v${{ env.VERSION }}"
