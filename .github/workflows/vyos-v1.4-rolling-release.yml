@@ -26,7 +26,9 @@ jobs:
 
     steps:
       - name: Set release date
-        run: echo "RELEASE_DATE=$(date +%Y%m%d%H%M)" >> "$GITHUB_ENV"
+        run: |
+          TZ='Pacific/Auckland'
+          echo "RELEASE_DATE=$(date +%Y%m%d%H%M)" >> "$GITHUB_ENV"
 
       - name: Clone source code
         run: git clone -b $BRANCH --single-branch $GIT_CLONE_URL
@@ -41,8 +43,8 @@ jobs:
         uses: meeDamian/github-release@2.0
         with:
           token: ${{ secrets.GH_TOKEN }}
-          tag: $RELEASE_DATE
-          name: $GITHUB_WORKFLOW
+          tag: ${{ RELEASE_DATE }}
+          name: ${{ GITHUB_WORKFLOW }}-${{ RELEASE_DATE }}
           files: vyos-build/build/vyos-${{ env.VERSION }}-*.iso
 
 #      - name: Upload artifact
