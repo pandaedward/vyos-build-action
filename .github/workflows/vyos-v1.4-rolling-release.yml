@@ -1,12 +1,12 @@
 name: VyOS v1.4 Rolling Release
 
-#on:
-#  schedule:
-#    - cron: 0 0 * * 1
 on:
-  push:
-    branches:
-      - 'master'
+  schedule:
+    - cron: 0 0 * * 1
+#on:
+#  push:
+#    branches:
+#      - 'master'
 
 env:
   GIT_CLONE_URL: https://github.com/vyos/vyos-build
