@@ -35,12 +35,12 @@ jobs:
         working-directory: ./vyos-build
         run: |
           sudo make clean
-          sudo ./build-vyos-image iso \
-          --architecture $ARCHITECTURE \
-          --build-by $BUILD_BY \
-          --build-type $BUILD_TYPE \
-          --version $VERSION-$RELEASE_DATE \
-          --custom-package "git mtr"
+          sudo ./build-vyos-image iso --architecture $ARCHITECTURE --build-by $BUILD_BY --build-type $BUILD_TYPE --version $VERSION-$RELEASE_DATE --custom-package "git mtr"
+
+      - name: debug check
+        run: |
+          pwd
+          ls -alh .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
