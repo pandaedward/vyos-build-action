@@ -35,7 +35,7 @@ jobs:
         working-directory: ./vyos-build
         run: |
           sudo make clean
-          sudo ./build-vyos-image iso --architecture $ARCHITECTURE --build-by $BUILD_BY --build-type $BUILD_TYPE --version $VERSION-$RELEASE_DATE --custom-package "git" --custom-package "mtr"
+          sudo ./build-vyos-image iso --architecture $ARCHITECTURE --build-by $BUILD_BY --build-type $BUILD_TYPE --version $VERSION-$RELEASE_DATE --custom-package "git"
 
       - name: Create release
         uses: meeDamian/github-release@2.0
