@@ -43,8 +43,8 @@ jobs:
         uses: meeDamian/github-release@2.0
         with:
           token: ${{ secrets.GH_TOKEN }}
-          tag: ${{ RELEASE_DATE }}
-          name: ${{ GITHUB_WORKFLOW }}-${{ RELEASE_DATE }}
+          tag: ${{ env.RELEASE_DATE }}
+          name: vyos-build-${{ env.RELEASE_DATE }}
           files: vyos-build/build/vyos-${{ env.VERSION }}-*.iso
 
 #      - name: Upload artifact
