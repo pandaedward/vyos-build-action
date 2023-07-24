@@ -35,19 +35,22 @@ jobs:
         working-directory: ./vyos-build
         run: |
           sudo make clean
-          sudo ./build-vyos-image iso --architecture $ARCHITECTURE --build-by $BUILD_BY --build-type $BUILD_TYPE --version $VERSION-$RELEASE_DATE --custom-package "git"
+          sudo ./build-vyos-image iso --architecture $ARCHITECTURE --build-by $BUILD_BY --build-type $BUILD_TYPE --version $VERSION-$RELEASE_DATE --custom-package "git" --custom-package "mtr"
 
-      - name: debug check
-        run: |
-          pwd
-          ls -alh vyos-build/
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Create release
+        uses: meeDamian/github-release@2.0.3
         with:
-          # name: vyos-${{ env.VERSION }}-${{ env.ARCHITECTURE }}-iso
-          name: vyos-${{ env.VERSION }}-${{ env.RELEASE_DATE }}-${{ env.ARCHITECTURE }}.iso
-          path: vyos-build/build/vyos-${{ env.VERSION }}-*.iso
+          token: ${{ secrets.GH_TOKEN }}
+          tag: $RELEASE_DATE
+          name: $GITHUB_WORKFLOW
+          files: vyos-build/build/vyos-${{ env.VERSION }}-*.iso
+
+#      - name: Upload artifact
+#        uses: actions/upload-artifact@v3
+#        with:
+#          # name: vyos-${{ env.VERSION }}-${{ env.ARCHITECTURE }}-iso
+#          name: vyos-${{ env.VERSION }}-${{ env.RELEASE_DATE }}-${{ env.ARCHITECTURE }}.iso
+#          path: vyos-build/build/vyos-${{ env.VERSION }}-*.iso
 
     outputs:
       RELEASE_DATE: ${{ env.RELEASE_DATE }}
