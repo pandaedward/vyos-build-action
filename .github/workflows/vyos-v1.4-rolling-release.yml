@@ -79,12 +79,12 @@ jobs:
 #          tag_name="v${{ env.VERSION }}"
 #          hub release edit -a "$asset" -m "" "$tag_name"
 
-  delete_old_workflow_runs:
-    needs: build
-    runs-on: ubuntu-latest
+  # delete_old_workflow_runs:
+  #   needs: build
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Delete old workflow runs
-        uses: GitRML/delete-workflow-runs@main
-        with:
-          retain_days: 31
+  #   steps:
+  #     - name: Delete old workflow runs
+  #       uses: GitRML/delete-workflow-runs@main
+  #       with:
+  #         retain_days: 31
